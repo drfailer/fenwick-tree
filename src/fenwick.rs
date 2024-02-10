@@ -12,29 +12,29 @@ pub struct Fenwick {
 // 7 => 111 => (2² + 2¹) + 2⁰ (6,6) : on part de (2² + 2¹) et on en prend 2⁰
 // ...
 
-fn init(arr: &Vec<i32>) -> Vec<i32> {
-    let size = arr.len() + 1;
-    let mut result = vec![0; size];
-
-    for idx in 1..size {
-        let idx_i32 = idx as i32;
-        let count = idx_i32 & -idx_i32;
-        let begin = idx_i32 & !count;
-
-        for i in begin..(begin + count) {
-            result[idx] += arr[i as usize];
-        }
-    }
-    return result;
-}
-
 #[allow(dead_code, unused)]
 impl Fenwick {
     pub fn new(arr: &Vec<i32>) -> Self {
         Self {
-            bits: init(arr),
+            bits: Fenwick::init(arr),
             size: arr.len() + 1,
         }
+    }
+
+    fn init(arr: &Vec<i32>) -> Vec<i32> {
+        let size = arr.len() + 1;
+        let mut result = vec![0; size];
+
+        for idx in 1..size {
+            let idx_i32 = idx as i32;
+            let count = idx_i32 & -idx_i32;
+            let begin = idx_i32 & !count;
+
+            for i in begin..(begin + count) {
+                result[idx] += arr[i as usize];
+            }
+        }
+        return result;
     }
 
     pub fn query(&self, idx: usize) -> i32 {
