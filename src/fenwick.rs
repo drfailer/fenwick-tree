@@ -1,8 +1,3 @@
-pub struct Fenwick {
-    bits: Vec<i32>,
-    size: usize,
-}
-
 // 1 => 001 =>         0 + 2⁰ (0,0) : on part de 0 et on en prend 1
 // 2 => 010 =>         0 + 2¹ (0,1) : on part de 0 et on en prend 2¹
 // 3 => 011 =>        2¹ + 2⁰ (2,2) : on part de 2¹ et on en prend 2⁰
@@ -12,7 +7,15 @@ pub struct Fenwick {
 // 7 => 111 => (2² + 2¹) + 2⁰ (6,6) : on part de (2² + 2¹) et on en prend 2⁰
 // ...
 
-#[allow(dead_code, unused)]
+/******************************************************************************/
+/*                                Fenwick tree                                */
+/******************************************************************************/
+
+pub struct Fenwick {
+    bits: Vec<i32>,
+    size: usize,
+}
+
 impl Fenwick {
     pub fn new(arr: &Vec<i32>) -> Self {
         Self {
@@ -78,7 +81,7 @@ impl Fenwick {
         let mut i = 1;
 
         while (i | idx) < self.size && ((i | idx) != idx)  {
-            for j in 0..lvl {
+            for _ in 0..lvl {
                 print!("   ");
             }
             println!("{}", self.bits[idx | i]);
