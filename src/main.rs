@@ -1,4 +1,5 @@
 mod fenwick;
+mod tests;
 
 use fenwick::Fenwick;
 
@@ -21,7 +22,7 @@ fn main() {
     println!("sum(0, 1): {} == 3", f.query(1));
     println!("sum(0, 2): {} == 6", f.query(2));
     println!("sum(0, 3): {} == 10", f.query(3));
-    println!("sum(3, 4): {} == 7", f.query_range(3, 4));
+    println!("sum(3, 4): {} == 9", f.query_range(3, 4));
 
     arr[1] += 8;
     f.update(1, 8);
