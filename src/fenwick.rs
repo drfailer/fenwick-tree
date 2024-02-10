@@ -52,6 +52,15 @@ impl Fenwick {
         self.query(idx2) - self.query(idx1 - 1)
     }
 
+    pub fn update(&mut self, idx: usize, delta: i32) {
+        let mut i = idx as i32 + 1;
+
+        while i > 0 {
+            self.bits[i as usize] += delta;
+            i -= i & -i;
+        }
+    }
+
     pub fn print_bits(&self) {
         print!("[ ");
         for elt in &self.bits {
