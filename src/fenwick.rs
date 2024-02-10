@@ -37,9 +37,9 @@ impl Fenwick {
         }
     }
 
-    pub fn query(&self, idx: i32) -> i32 {
+    pub fn query(&self, idx: usize) -> i32 {
         let mut result = 0;
-        let mut i = idx + 1;
+        let mut i = idx as i32 + 1;
 
         while i > 0 {
             result += self.bits[i as usize];
@@ -48,7 +48,7 @@ impl Fenwick {
         result
     }
 
-    pub fn query_range(&self, idx1: i32, idx2: i32) -> i32 {
+    pub fn query_range(&self, idx1: usize, idx2: usize) -> i32 {
         self.query(idx2) - self.query(idx1 - 1)
     }
 
